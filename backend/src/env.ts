@@ -29,6 +29,11 @@ const EnvSchema = z.object({
     ]),
 
     DB_MIGRATING: stringBoolean,
+
+    // Resend Email Configuration
+    RESEND_API_KEY: z.string().nonempty(),
+    EMAIL_FROM: z.string().nonempty(),
+    EMAIL_FROM_NAME: z.string().nonempty(),
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;

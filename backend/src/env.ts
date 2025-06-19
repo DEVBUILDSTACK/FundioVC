@@ -1,0 +1,54 @@
+import { config } from "dotenv";
+import { expand } from "dotenv-expand";
+import { z, ZodError } from "zod";
+
+const stringBoolean = z.coerce
+    .string()
+    .transform((val) => {
+        return val === "true";
+    })
+    .default("false");
+
+const EnvSchema = z.object({
+    NODE_ENV: z.string(),
+
+    PORT: z.coerce.number(),
+    DB_URL: z.string().nonempty(),
+
+    CORS_ORIGIN: z.string().nonempty(),
+    JWT_SECRET: z.string().nonempty(),
+
+    LOG_LEVEL: z.enum([
+        "fatal",
+        "error",
+        "warn",
+        "info",
+        "debug",
+        "trace",
+        "silent",
+    ]),
+
+    DB_MIGRATING: stringBoolean,
+});
+
+export type EnvSchema = z.infer<typeof EnvSchema>;
+
+expand(config());
+
+try {
+    EnvSchema.parse(process.env); // eslint-disable-line
+} catch (error) {
+    if (error instanceof ZodError) {
+        let message = "Missing required values in .env:\n";
+        error.issues.forEach((issue) => {
+            message += `${issue.path[0]}\n`;
+        });
+        const e = new Error(message);
+        e.stack = "";
+        throw e;
+    } else {
+        console.error(error);
+    }
+}
+
+export default EnvSchema.parse(process.env); // eslint-disable-line

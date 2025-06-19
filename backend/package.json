@@ -14,8 +14,7 @@
         "build": "tsc && tsc-alias",
         "db:generate": "drizzle-kit generate",
         "db:migrate": "cross-env DB_MIGRATING=true tsx src/db/migrate.ts",
-        "init-prod": "npm install --legacy-peer-dep && npm run db:migrate && npm run build && pm2 start npm --name 'fundio-backend' -- run 'prod'",
-        "prepare": "husky"
+        "init-prod": "npm install --legacy-peer-dep && npm run db:migrate && npm run build && pm2 start npm --name 'fundio-backend' -- run 'prod'"
     },
     "dependencies": {
         "bcryptjs": "^3.0.2",

@@ -59,7 +59,6 @@ This project uses:
 
 - **ESLint** for code linting
 - **ESLint Stylistic** for consistent code formatting
-- **Husky** for pre-commit hooks
 
 ### ESLint Setup
 
@@ -78,7 +77,6 @@ pnpm run lint:fix
 - Drizzle ORM
 - ESLint + ESLint Stylistic
 - PM2 (for production)
-- Husky (Pre Commit hooks)
 
 ---
 

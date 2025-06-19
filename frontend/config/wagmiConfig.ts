@@ -1,4 +1,4 @@
-import { base, baseSepolia, mainnet, sepolia } from 'viem/chains';
+import { base, baseSepolia, mainnet } from 'viem/chains';
 import { http } from 'wagmi';
 
 import { createConfig } from '@privy-io/wagmi';
